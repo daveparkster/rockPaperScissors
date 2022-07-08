@@ -1,10 +1,10 @@
-let computerPlay = function () {
+function computerPlay () {
   let list = ["rock","paper","scissors"];
   let cpuDecision = list[Math.floor(Math.random() * list.length)]; 
   return cpuDecision;
 }
 
-function playRound(playerSelection,computerSelection) {
+let playRound = function(playerSelection,computerSelection) {
   switch (playerSelection) {
     case 'rock':
       if(computerSelection === 'paper') {
@@ -36,7 +36,48 @@ function playRound(playerSelection,computerSelection) {
   }
 }
 
-  console.log(playRound('paper','paper'));
+function cleanInput(string) {
+  return string.split('').filter((item) => item !== ' ').join('').toLowerCase();
+}
+
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  
+  for(let i = 0; i < 5; i++) {
+    let playerInput= window.prompt("Pick one of the following: rock, paper, scissors");
+    let playerDecision = cleanInput(playerInput); 
+    let computerDecision = computerPlay(); 
+
+    let roundResult = playRound(playerDecision, computerDecision);
+
+    if(roundResult === 'You lose') {
+      computerScore++;
+      console.log("You lose this round");
+      console.log(`Player Score: ${playerScore} Computer Score: ${computerScore}`); 
+    } else if(roundResult === 'You win') {
+      playerScore++;
+      console.log("You win this round");
+      console.log(`Player Score: ${playerScore} Computer Score: ${computerScore}`); 
+    } else if(roundResult === 'Tie') {
+      console.log("It\`s a tie!"); 
+      console.log(`Player Score: ${playerScore} Computer Score: ${computerScore}`); 
+    }
+  }
+
+  if(playerScore > computerScore) {
+    return 'You won the game!';
+  } else if(playerScore < computerScore) {
+    return 'Computer won the game!';
+  } else {
+    return 'It\'s a draw';
+  }
+}
+
+console.log(game());
+
+
+
 
 
 
