@@ -1,10 +1,10 @@
-function computerPlay () {
+function chooseComputer () {
   let list = ["Rock","Paper","Scissors"];
   let cpuDecision = list[Math.floor(Math.random() * list.length)]; 
   return cpuDecision;
 }
 
-let playRound = function(playerSelection,computerSelection) {
+function playRound(playerSelection, computerSelection) {
   switch (playerSelection) {
     case 'Rock':
       if(computerSelection === 'Paper') {
@@ -36,23 +36,9 @@ let playRound = function(playerSelection,computerSelection) {
   }
 }
 
-/* DOM */ 
-const BODY = document.body; 
-
-for(let i = 0; i <= 2; i++) {
-  let BUTTON = document.createElement("button");
-  BODY.append(BUTTON); 
-}
-
-const BUTTONS = document.querySelectorAll('button');
-BUTTONS[0].textContent = "Rock";
-BUTTONS[1].textContent = "Paper";
-BUTTONS[2].textContent = "Scissors"; 
-
-
-function chooseOne(element) {
+function displayRoundResults(element) {
   let userChoice = `${element.innerText}`; //string userChoice (rock, paper, scissors)
-  let computerChoice = computerPlay(); // string computerChoice (rock, paper, scissors)
+  let computerChoice = chooseComputer(); // string computerChoice (rock, paper, scissors)
   CHOICE.innerText = `Player Choice: ${userChoice} || Computer Choice: ${computerChoice}`; 
 
   let resultRound = playRound(userChoice, computerChoice); //result You Lose, You Win, etc
@@ -67,44 +53,7 @@ function chooseOne(element) {
   } else if(scoreTally === 'no increase') {
     return 3; 
   }
-}
-
-/*From line 48, I convert the value of the BUTTONS variable to an array*/
-let listButtons = Array.from(BUTTONS);
-
-/*keeping track of score */
-let playerScore = 0;
-let computerScore = 0; 
-
-/*Event listener*/
-listButtons.forEach(element => {
-  element.addEventListener('click', function() {
-    let score = chooseOne(element); 
-
-    if(score === 1) {
-      playerScore++; 
-    } else if(score === 2) {
-      computerScore++; 
-    } else if(score === 3) { 
-    }
-
-    SCORE.textContent = `Player Score: ${playerScore} || Computer Score: ${computerScore}`; //keeps track
-
-    if(playerScore === 5 && computerScore === 5) {
-      GAME.textContent = 'THE OVERALL GAME IS A TIE!'; 
-      alert('Do you want to play again?'); 
-    } else if(playerScore === 5 || computerScore === 5) {
-      if(playerScore === 5) {
-        GAME.textContent = 'PLAYER WINS'; 
-        alert('Do you want to play again?');
-      } else {
-        GAME.textContent = 'COMPUTER WINS';
-        alert('Do you want to play again?'); 
-      }
-    }
-  }); 
-}); 
-
+} 
 
 function changeScore(string) {
   if(string === 'You win this round') {
@@ -115,6 +64,53 @@ function changeScore(string) {
     return 'no increase'; 
   }
 }
+
+//Use DOM to create buttons
+const BODY = document.body; 
+
+for(let i = 0; i <= 2; i++) {
+  let BUTTON = document.createElement("button");
+  BODY.append(BUTTON); 
+}
+
+const BUTTONS = document.querySelectorAll('button');
+let listButtons = Array.from(BUTTONS);
+
+BUTTONS[0].textContent = "Rock";
+BUTTONS[1].textContent = "Paper";
+BUTTONS[2].textContent = "Scissors"; 
+
+
+let playerScore = 0;
+let computerScore = 0; 
+
+
+listButtons.forEach(element => {
+  element.addEventListener('click', function() {
+    let score = displayRoundResults(element); 
+
+    if(score === 1) {
+      playerScore++; 
+    } else if(score === 2) {
+      computerScore++; 
+    } else if(score === 3) { 
+      //no affect to computerScore
+    }
+
+    SCORE.textContent = `Player Score: ${playerScore} || Computer Score: ${computerScore}`; //displays scores
+
+    if(playerScore === 5 && computerScore === 5) {
+      GAME.textContent = 'THE OVERALL GAME IS A TIE!'; 
+    } else if(playerScore === 5 || computerScore === 5) {
+      if(playerScore === 5) {
+        GAME.textContent = 'PLAYER WINS'; 
+      } else {
+        GAME.textContent = 'COMPUTER WINS';
+      }
+    }
+  }); 
+}); 
+
 
 // Add divs through DOM
 const CHOICE = document.createElement('div');
@@ -129,5 +125,7 @@ BODY.appendChild(SCORE);
 const GAME = document.createElement('div');
 BODY.appendChild(GAME); 
 
+const RESETBUTTON = document.createElement('button'); 
+BODY.appendChild(BUTTON);
 
 
