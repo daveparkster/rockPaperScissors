@@ -101,11 +101,20 @@ listButtons.forEach(element => {
 
     if(playerScore === 5 && computerScore === 5) {
       GAME.textContent = 'THE OVERALL GAME IS A TIE!'; 
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000); 
     } else if(playerScore === 5 || computerScore === 5) {
       if(playerScore === 5) {
         GAME.textContent = 'PLAYER WINS'; 
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); 
       } else {
         GAME.textContent = 'COMPUTER WINS';
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); 
       }
     }
   }); 
