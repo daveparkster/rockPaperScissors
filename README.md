@@ -11,7 +11,11 @@
 ```
 A program that enables user
 to play a game of rock,
-paper, and scissors.
+paper, and scissors against
+computer.
+
+Game will automatically 
+reset after 2 seconds.
 ``` 
  ### Demo
  ![rpsoffical](https://user-images.githubusercontent.com/40774386/181438328-d2602a10-677f-44c3-9aef-e09b39186f9e.gif)
@@ -31,13 +35,11 @@ paper, and scissors.
  ```
  1) Importance of helper functions.
  2) Distinguish between switch statements and
-    if...else statements.
+    if/else statements.
  3) Planning out logic and writing out 
     pseudocode before implementation.
  ```
  ### Future Development
  ```
- 1) Reset game after user has played
-    5 rounds of rock,paper,and 
-    scissors with computer.
+ N/A
  ```
